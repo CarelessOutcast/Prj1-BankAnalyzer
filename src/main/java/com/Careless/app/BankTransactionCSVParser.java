@@ -5,11 +5,12 @@ import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
-public class BankTransactionParser {
+
+public class BankTransactionCSVParser implements InnerBankTransactionParser {
             final static DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
             // Line parsing commas for fields 
-            private BankTransaction parseLineFromCSV(final String line){
+            public BankTransaction parseLineFrom(final String line){
                     final String[] columns = line.split(",");
 
                     final LocalDate date = LocalDate.parse(columns[0],DATE_PATTERN);
@@ -20,10 +21,10 @@ public class BankTransactionParser {
                     return Transaction;
                 }
             // Parsing entire file
-            public List<BankTransaction> parseLineSFromCSV(final List<String> Lines){
+            public List<BankTransaction> parseLineSFrom(final List<String> Lines){
                     final List<BankTransaction> bankTransactions = new ArrayList<>();
                     for (final String line : Lines){
-                        bankTransactions.add(parseLineFromCSV(line));
+                        bankTransactions.add(parseLineFrom(line));
                     }
                     return bankTransactions;
                 }

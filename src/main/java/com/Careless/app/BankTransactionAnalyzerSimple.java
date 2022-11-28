@@ -9,19 +9,27 @@ import java.nio.file.Paths;
 import java.time.Month;
 
 class BankTransactionAnalyzerSimple {
-    // private static final String RESOURCES = "src/main/resources/";
-    private static BankTransactionParser bankTransactionParser = new BankTransactionParser();
+    private static final String RESOURCES = "src/main/resources/";
+    private static final String FILE = "transaction.csv";
 
-    public static void main(String[] args) throws 
+    public static void analyze(String args, InnerBankTransactionParser Parser) throws 
         IOException {
             // final Path path = Paths.get(RESOURCES + args[0]);
-            final Path path = Paths.get("transactions.csv");
+            final Path path = Paths.get(RESOURCES + FILE);
             final List<String> lines = Files.readAllLines(path);
 
-            List<BankTransaction> transactions = bankTransactionParser.parseLineSFromCSV(lines);
-            
-            System.out.println("The amount is "+ BankStatementProcessor.calculateTotalAmount(transactions));
-            System.out.println("The amount for November is "+ BankStatementProcessor.selectInMonth(transactions,Month.NOVEMBER));
+            List<BankTransaction> transactions = Parser.parseLineSFrom(lines);
+            BankStatementProcessor processor  = new BankStatementProcessor(transactions);
+
+            CollectSummary(processor);
         }
+
+    private static void CollectSummary(final BankStatementProcessor processor){
+            System.out.println("The amount is "+ processor.calculateTotalAmount());
+            System.out.println("The amount for November is "+ processor.selectInMonth(Month.NOVEMBER));
+        
+    }
+    
 }
+
 

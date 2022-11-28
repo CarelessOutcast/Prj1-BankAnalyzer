@@ -9,8 +9,11 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>Prj1-BankAnalyzer</name>
+  <description> Project for analyzing my bank statments offline </description>
   <!-- FIXME change it to the project's website -->
   <url>http://www.test-example.com</url>
+
+  <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,12 +31,7 @@
   </dependencies>
 
   <build>
-      <resources>
-          <resource>
-              <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-          </resource>
-      </resources>
+
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -63,7 +61,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>com.Careless.app.BankTransactionAnalyzerSimple</mainClass>
+                <mainClass>com.Careless.app.Main</mainClass>
               </manifest>
             </archive>
           </configuration>
