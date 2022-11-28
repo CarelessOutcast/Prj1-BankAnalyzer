@@ -24,10 +24,12 @@ public class BankTransaction {
         public double getAmount() {
             return amount;
         }
+    //this is for the json parsing 
         public String toString(){
             return "BankTransaction {"+"date="+date+"amount="+amount+", description='"+description+'\''+'}';
 
         }
+    //this is for the test
         public boolean equals(Object o){
             if (this== o) return true; 
             if (this == null || getClass() != o.getClass())return false; 
