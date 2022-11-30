@@ -9,15 +9,13 @@ import java.nio.file.Paths;
 
 class BankTransactionAnalyzerSimple {
     private static final String RESOURCES = "src/main/resources/";
-    private static final String FILE = "transaction.csv";
 
     public static void analyze(
         final String filename,
         final InterfaceBankTransactionParser Parser,
         final InterfaceExporter exporter) throws IOException {
         
-            // final Path path = Paths.get(RESOURCES + filename);
-            final Path path = Paths.get(RESOURCES + FILE);
+            final Path path = Paths.get(RESOURCES + filename);
             final List<String> lines = Files.readAllLines(path);
 
             final List<BankTransaction> listTransactions = Parser.parseLineSFrom(lines);
