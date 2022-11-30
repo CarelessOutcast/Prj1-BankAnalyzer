@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
 
-public class BankTransactionCSVParser implements InnerBankTransactionParser {
+public class BankTransactionCSVParser implements InterfaceBankTransactionParser {
             final static DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
             // Line parsing commas for fields 
@@ -17,8 +17,7 @@ public class BankTransactionCSVParser implements InnerBankTransactionParser {
                     final String description = columns[1];
                     final double amount = Double.parseDouble(columns[2]);
 
-                    BankTransaction Transaction = new BankTransaction(date, amount, description);
-                    return Transaction;
+                    return new BankTransaction(date, amount, description);
                 }
             // Parsing entire file
             public List<BankTransaction> parseLineSFrom(final List<String> Lines){

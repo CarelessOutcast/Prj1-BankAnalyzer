@@ -5,8 +5,9 @@ import java.io.IOException;
 public class Main{
 public static void main(String[] args) throws IOException {
 
-    final InnerBankTransactionParser Parser = new BankTransactionCSVParser();
+    final InterfaceBankTransactionParser Parser = new BankTransactionCSVParser();
+    final InterfaceExporter exporter = new HtmlExporter();
 
-    BankTransactionAnalyzerSimple.analyze("",Parser);
+    BankTransactionAnalyzerSimple.analyze("",Parser,exporter);
 
 }}

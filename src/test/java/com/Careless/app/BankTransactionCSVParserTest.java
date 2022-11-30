@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BankTransactionCSVParserTest{
-    private final InnerBankTransactionParser Parser = new BankTransactionCSVParser();
+    private final InterfaceBankTransactionParser Parser = new BankTransactionCSVParser();
 
     @Test
     public void shouldParseOneCoorectLine() throws Exception {

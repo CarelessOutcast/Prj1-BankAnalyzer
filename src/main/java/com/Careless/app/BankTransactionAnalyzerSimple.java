@@ -6,30 +6,30 @@ import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Month;
 
 class BankTransactionAnalyzerSimple {
     private static final String RESOURCES = "src/main/resources/";
     private static final String FILE = "transaction.csv";
 
-    public static void analyze(String args, InnerBankTransactionParser Parser) throws 
-        IOException {
-            // final Path path = Paths.get(RESOURCES + args[0]);
+    public static void analyze(
+        final String filename,
+        final InterfaceBankTransactionParser Parser,
+        final InterfaceExporter exporter) throws IOException {
+        
+            // final Path path = Paths.get(RESOURCES + filename);
             final Path path = Paths.get(RESOURCES + FILE);
             final List<String> lines = Files.readAllLines(path);
 
-            List<BankTransaction> transactions = Parser.parseLineSFrom(lines);
-            BankStatementProcessor processor  = new BankStatementProcessor(transactions);
+            final List<BankTransaction> listTransactions = Parser.parseLineSFrom(lines);
 
-            CollectSummary(processor);
+            final BankStatementProcessor processor  = new BankStatementProcessor(listTransactions);
+
+            final Summarizer summary = processor.summarizeTransactions();
+
+            System.out.println(exporter.export(summary));
         }
 
-    private static void CollectSummary(final BankStatementProcessor processor){
-            System.out.println("The amount is "+ processor.calculateTotalAmount());
-            System.out.println("The amount for November is "+ processor.selectInMonth(Month.NOVEMBER));
-        
     }
     
-}
 
 
